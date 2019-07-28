@@ -1,0 +1,36 @@
+{
+  "name": "babel-plugin-jsx-merge-props",
+  "version": "0.0.1",
+  "author": "hooriza@gmail.com",
+  "main": "dist/index.js",
+  "dependencies": {
+    "@babel/helper-builder-react-jsx": "^7.3.0",
+    "@babel/helper-plugin-utils": "^7.0.0",
+    "@babel/plugin-syntax-jsx": "^7.2.0",
+    "@babel/plugin-transform-runtime": "^7.4.3",
+    "@babel/runtime": "^7.5.5"
+  },
+  "peerDependencies": {
+    "@babel/core": "^7.0.0-0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.4.3",
+    "@babel/core": "^7.2.0",
+    "@babel/helper-plugin-test-runner": "^7.0.0",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/register": "^7.4.0",
+    "chalk": "^1.1.0",
+    "clear": "0.0.1",
+    "diff": "^3.2.0",
+    "watch": "^1.0.1"
+  },
+  "scripts": {
+    "build": "babel src --out-dir dist",
+    "test": "node test",
+    "watch": "node test --watch",
+    "prepublish": "npm test && npm run build"
+  },
+  "keywords": [
+    "babel-plugin"
+  ]
+}
