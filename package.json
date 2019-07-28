@@ -1,7 +1,10 @@
 {
   "name": "babel-plugin-jsx-merge-props",
+  "description": "Plugin that merge props of JSX with babel",
   "version": "0.0.1",
   "author": "hooriza@gmail.com",
+  "homepage": "https://github.com/hooriza/babel-plugin-jsx-merge-props",
+  "license": "MIT",
   "main": "dist/index.js",
   "dependencies": {
     "@babel/helper-builder-react-jsx": "^7.3.0",
@@ -10,27 +13,34 @@
     "@babel/plugin-transform-runtime": "^7.4.3",
     "@babel/runtime": "^7.5.5"
   },
-  "peerDependencies": {
-    "@babel/core": "^7.0.0-0"
-  },
   "devDependencies": {
     "@babel/cli": "^7.4.3",
     "@babel/core": "^7.2.0",
     "@babel/helper-plugin-test-runner": "^7.0.0",
     "@babel/preset-env": "^7.5.5",
     "@babel/register": "^7.4.0",
+    "babel-eslint": "^10.0.2",
     "chalk": "^1.1.0",
     "clear": "0.0.1",
     "diff": "^3.2.0",
+    "eslint": "^6.1.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "prettier": "1.18.2",
     "watch": "^1.0.1"
   },
   "scripts": {
     "build": "babel src --out-dir dist",
     "test": "node test",
     "watch": "node test --watch",
+    "lint": "eslint src test",
     "prepublish": "npm test && npm run build"
   },
   "keywords": [
-    "babel-plugin"
+    "babel-plugin",
+    "jsx",
+    "merge-props"
+  ],
+  "files": [
+    "dist"
   ]
 }

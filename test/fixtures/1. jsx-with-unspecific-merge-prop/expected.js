@@ -1,11 +1,14 @@
 "use strict";
 
-// @mergeProps
 function hello() {
   return <div {...mergeProps({
     className: "hello"
   }, {
-    value: 1
+    of: 2
+  }, {
+    "for": 10
+  }, {
+    bravo: true
   })}>hello</div>;
 }
 

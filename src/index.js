@@ -1,55 +1,51 @@
-import jsx from "@babel/plugin-syntax-jsx";
+import jsx from '@babel/plugin-syntax-jsx';
 
-const MERGE_PROPS_ANNOTATION_REGEX = /\*?\s*@mergeProps(\s+([^\s]+))?/;
-const DEFAULT_MEGER_PROPS_FRAG = 'mergeProps';
+const DEFAULT_MERGE_PROP_FRAG = 'mergeProps';
+const extendLocation = (dst, src) =>
+  Object.assign(dst, {
+    start: src.start,
+    end: src.end,
+    loc: src.loc,
+  });
 
 module.exports = ({ types: t }) => {
+  const isMergeProp = attr => t.isJSXAttribute(attr) && attr.name.name === 'merge';
   const visitor = {};
-
-  visitor.Program = {
-    enter(path, state) {
-      const { file } = state;
-      let mergePropsFrag = null;
-
-      if (file.ast.comments) {
-        for (const comment of file.ast.comments) {
-          const annotationMatches = MERGE_PROPS_ANNOTATION_REGEX.exec(comment.value);
-          console.log('comment.value', comment.value);
-          if (annotationMatches) {
-            mergePropsFrag = annotationMatches[2] || DEFAULT_MEGER_PROPS_FRAG;
-          }
-        }
-      }
-
-      state.set('mergePropsFrag', mergePropsFrag);
-    }
-  };
 
   visitor.JSXElement = (path, state) => {
     const { openingElement } = path.node;
-    const mergePropsFrag = state.get('mergePropsFrag');
-    if (mergePropsFrag === null) return;
 
-    const args = openingElement.attributes.map((attr, idx) => {
-      if (t.isJSXSpreadAttribute(attr)) {
-        return attr.argument;
-      }
+    const mergeProp = openingElement.attributes.find(isMergeProp);
+    if (!mergeProp) return;
 
-      const { name, value } = attr;
-      return Object.assign({ start: attr.start, end: attr.end, loc: attr.loc }, t.objectExpression([
-        t.objectProperty(
-          t.identifier(name.name),
-          t.isJSXExpressionContainer(value) ? value.expression : value
-        )
-      ]));
-    });
+    const mergeIdentifier = t.isJSXExpressionContainer(mergeProp.value)
+      ? mergeProp.value.expression
+      : mergeProp.value || extendLocation(t.identifier(DEFAULT_MERGE_PROP_FRAG), mergeProp);
 
-    openingElement.attributes = [ t.jsxSpreadAttribute(t.callExpression(t.identifier(mergePropsFrag), args)) ];
+    const args = openingElement.attributes
+      .map(attr => {
+        if (t.isJSXSpreadAttribute(attr)) return attr.argument;
+        if (isMergeProp(attr)) return null;
+
+        const { name, value } = attr;
+        return extendLocation(
+          t.objectExpression([
+            t.objectProperty(
+              t.identifier(name.name),
+              t.isJSXExpressionContainer(value) ? value.expression : value || t.BooleanLiteral(true)
+            ),
+          ]),
+          attr
+        );
+      })
+      .filter(v => v);
+
+    openingElement.attributes = [t.jsxSpreadAttribute(t.callExpression(mergeIdentifier, args))];
   };
 
-	return {
+  return {
     name: 'transform-react-jsx-merge-props',
     inherits: jsx,
     visitor,
-	};
+  };
 };

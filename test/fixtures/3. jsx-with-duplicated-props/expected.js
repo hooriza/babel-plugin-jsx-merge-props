@@ -1,14 +1,11 @@
 "use strict";
 
-/**
- * @mergeProps myMergeProps
- **/
 function hello() {
   var props = {
     a: 2
   };
   var custom = 30;
-  return <div {...myMergeProps(props, func(1, "2", 3), {
+  return <div {...(true ? foo : bar)(props, func(1, "2", 3), {
     b: 1
   }, {
     value: 1
@@ -18,7 +15,7 @@ function hello() {
     className: /10/
   }, {
     onClick: function onClick() {
-      return <tag {...myMergeProps({
+      return <tag {..."foo"({
         a: 1
       }, {
         b: 1
@@ -27,7 +24,7 @@ function hello() {
   }, {
     custom: custom
   }, {
-    gee: <span {...myMergeProps({
+    gee: <span {..."hello"({
       className: "a"
     }, props)} />
   })}>hello</div>;
