@@ -1,5 +1,10 @@
 # babel-plugin-jsx-merge-props
 
+[![Build Status](https://travis-ci.org/hooriza/babel-plugin-jsx-merge-props.svg?branch=master)](https://travis-ci.org/hooriza/babel-plugin-jsx-merge-props)
+[![codecov](https://codecov.io/gh/hooriza/babel-plugin-jsx-merge-props/branch/master/graph/badge.svg)](https://codecov.io/gh/hooriza/babel-plugin-jsx-merge-props)
+[![npm](https://img.shields.io/npm/v/babel-plugin-jsx-merge-props.svg)](https://www.npmjs.com/package/babel-plugin-jsx-merge-props)
+![size](https://img.shields.io/bundlephobia/minzip/babel-plugin-jsx-merge-props.svg)
+
 
 ## Why?
 It's annoying to use props that provided from multiple hooks.
