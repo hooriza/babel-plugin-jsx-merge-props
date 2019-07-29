@@ -32,7 +32,7 @@
     "watch": "^1.0.1"
   },
   "scripts": {
-    "build": "babel src --out-dir dist",
+    "build": "babel src/index.js --out-dir dist",
     "test": "jest",
     "lint": "eslint src",
     "prepublish": "npm test && npm run build"
