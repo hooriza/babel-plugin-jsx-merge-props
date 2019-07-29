@@ -4,6 +4,10 @@
   "version": "0.0.1",
   "author": "hooriza@gmail.com",
   "homepage": "https://github.com/hooriza/babel-plugin-jsx-merge-props",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hooriza/babel-plugin-jsx-merge-props.git"
+  },
   "license": "MIT",
   "main": "dist/index.js",
   "dependencies": {
@@ -20,19 +24,17 @@
     "@babel/preset-env": "^7.5.5",
     "@babel/register": "^7.4.0",
     "babel-eslint": "^10.0.2",
-    "chalk": "^1.1.0",
-    "clear": "0.0.1",
-    "diff": "^3.2.0",
     "eslint": "^6.1.0",
     "eslint-plugin-prettier": "^3.1.0",
+    "fs-extra": "^8.1.0",
+    "jest": "^24.8.0",
     "prettier": "1.18.2",
     "watch": "^1.0.1"
   },
   "scripts": {
     "build": "babel src --out-dir dist",
-    "test": "node test",
-    "watch": "node test --watch",
-    "lint": "eslint src test",
+    "test": "jest",
+    "lint": "eslint src",
     "prepublish": "npm test && npm run build"
   },
   "keywords": [
