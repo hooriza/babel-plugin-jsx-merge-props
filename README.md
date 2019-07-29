@@ -6,7 +6,7 @@
 
 
 ## Why?
-It's annoying to use props that provided from multiple hooks.
+It's annoying to use props that provided from multiple [hooks](https://reactjs.org/docs/hooks-intro.html).
 
 ```jsx
 const useFirstHook = () => {
