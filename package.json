@@ -1,7 +1,7 @@
 {
   "name": "babel-plugin-jsx-merge-props",
   "description": "Plugin that merge props of JSX with babel",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "hooriza@gmail.com",
   "homepage": "https://github.com/hooriza/babel-plugin-jsx-merge-props",
   "repository": {
