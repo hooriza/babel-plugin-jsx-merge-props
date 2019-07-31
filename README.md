@@ -4,6 +4,46 @@
 [![codecov](https://codecov.io/gh/hooriza/babel-plugin-jsx-merge-props/branch/master/graph/badge.svg)](https://codecov.io/gh/hooriza/babel-plugin-jsx-merge-props)
 [![npm](https://img.shields.io/npm/v/babel-plugin-jsx-merge-props.svg)](https://www.npmjs.com/package/babel-plugin-jsx-merge-props)
 
+```jsx
+<div
+  merge={mergeProps}
+  className="foo"
+  className="bar"
+  style={{ color: 'red' }}
+  style={{ backgroundColor: 'blue' }}
+  onClick={() => console.log('foo')}
+  onClick={() => console.log('bar')}
+/>
+```
+
+become to
+
+```jsx
+<div
+  {...mergeProps(
+    { className: 'foo' },
+    { className: 'bar' },
+    { style: { color: 'red' } },
+    { style: { backgroundColor: 'blue' } },
+    { onClick: () => console.log('foo') },
+    { onClick: () => console.log('bar') }
+  )}
+/>
+```
+
+This will works like
+
+```jsx
+<div
+  className="foo bar"
+  style={{ color: 'red', backgroundColor: 'blue' }}
+  onClick={() => {
+    console.log('foo');
+    console.log('bar');
+  }}
+/>
+```
+
 ## Why?
 It's annoying to use props that provided from multiple [hooks](https://reactjs.org/docs/hooks-intro.html).
 
