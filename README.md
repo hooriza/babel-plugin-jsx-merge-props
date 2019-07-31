@@ -142,3 +142,6 @@ npm install --save-dev babel-plugin-jsx-merge-props
   "plugins": [ "babel-plugin-jsx-merge-props" ]
 }
 ```
+
+## Related
+* [merge-props](https://github.com/andrewbranch/merge-props): Merges className, style, and event handler props for React elements
